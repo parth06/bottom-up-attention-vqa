@@ -118,9 +118,12 @@ if __name__ == '__main__':
                 val_imgids.remove(image_id)
                 val_indices[image_id] = val_counter
                 val_img_bb[val_counter, :, :] = bboxes
-                val_img_features[val_counter, :, :] = np.frombuffer(
+                try:
+                 val_img_features[val_counter, :, :] = np.frombuffer(
                     base64.decodestring(item['features']),
                     dtype=np.float32).reshape((item['num_boxes'], -1))
+                except:
+                 pass
                 val_spatial_img_features[val_counter, :, :] = spatial_features
                 val_counter += 1
             else:
