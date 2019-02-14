@@ -122,7 +122,8 @@ if __name__ == '__main__':
                  val_img_features[val_counter, :, :] = np.frombuffer(
                     base64.decodestring(item['features']),
                     dtype=np.float32).reshape((item['num_boxes'], -1))
-                except:
+                except binascii.Error:
+                 item['features']
                  pass
                 val_spatial_img_features[val_counter, :, :] = spatial_features
                 val_counter += 1
